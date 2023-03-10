@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="./assets/rock-paper-scissors.ico"
+      type="image/x-icon"
+    />
+    <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="scoreBoard">
+        <div class="title">
+          <h1>Rock</h1>
+          <h1>Paper</h1>
+          <h1>Scissors</h1>
+        </div>
+        <div class="scoreCards">
+          <div class="playerScore">
+            <p>PLAYERSS SCORE</p>
+            <h2>12</h2>
+          </div>
+          <div class="computerScore">
+            <p>COMPUTER SCORE</p>
+            <h2>23</h2>
+          </div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="roundNum">Round 1</div>
+        <div class="chooseboard">
+          <div class="chooseCard">
+            <p>Rock</p>
+            <div class="rockHand circle">
+              <img src="./assets/rock.png" alt="rockHand" />
+            </div>
+          </div>
+          <div class="chooseCard">
+            <p>Paper</p>
+            <div class="paperHand circle">
+              <img src="./assets/paper.png" alt="paperHand" />
+            </div>
+          </div>
+          <div class="chooseCard">
+            <p>Scissor</p>
+            <div class="scissorHand circle">
+              <img src="./assets/scissor.png" alt="scissorHand" />
+            </div>
+          </div>
+        </div>
+
+        <div class="playboard">
+          <div class="yourChoice">
+            <p>You Picked</p>
+            <div class="rockHand circle">
+              <img src="./assets/rock.png" alt="rockHand" />
+            </div>
+          </div>
+          <div class="messageBox">
+            <p class="message">TIE UP!</p>
+            <button class="nextBtn">Next round</button>
+          </div>
+          <div class="computerChoice">
+            <p>PC Picked</p>
+            <div class="paperHand circle">
+              <img src="./assets/paper.png" alt="paperHand" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rulesBtn">RULES</div>
+    <div class="rulesContainer">
+      <div><button class="rulesCloseBtn">X</button></div>
+      <h2>Game Rules</h2>
+      <ul>
+        <li>Rock beats scissors, scissors beat paper, and paper beats rock.</li>
+        <li>
+          Agree ahead of time whether you'll count off "rock, paper, scissors,
+          shoot" or just "rock, paper, scissors".
+        </li>
+        <li>
+          Use rock, paper, scissors to settle minor decisions or simply play to
+          pass the time.
+        </li>
+        <li>
+          If both players lay down the same hand, each player lays down another
+          hand.
+        </li>
+      </ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

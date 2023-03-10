@@ -1,0 +1,16 @@
+
+
+    <div class="starIcon">
+      <img src="./assets/star.png" alt="" />
+    </div>
+    <div class="modal">
+      <div class="animation">
+        <!-- <img src="./assets/giphy.gif" alt="" /> -->
+        <img src="./assets/won.png" alt="" />
+      </div>
+      <div class="result">
+        <h2>Hurray!!!</h2>
+        <h4>You won the game.</h4>
+      </div>
+      <button>Play again</button>
+    </div>
