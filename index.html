@@ -19,7 +19,42 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="modalResume">
+      <div class="modal-content">
+        <button class="resumeBtn">Resume</button>
+        <button class="restartBtn">Restart</button>
+        <button class="exitBtn">Exit</button>
+      </div>
+    </div>
+
     <div class="container">
+      <!-- <div class="starIcon">
+        <img src="./assets/star.png" alt="" />
+      </div> -->
+      <div class="modal">
+        <div class="animation">
+          <!-- <img src="./assets/giphy.gif" alt="" /> -->
+          <img src="./assets/won.png" alt="" />
+        </div>
+        <div class="result">
+          <h2 class="gameResult1"></h2>
+          <h4 class="gameResult2"></h4>
+        </div>
+        <button class="playAgainBtn">Play again</button>
+      </div>
+
+      <div class="startGameForm">
+        <h1 style="color: white">ROCK PAPER SCISSORS</h1>
+        <input type="text" id="usernameInput" placeholder="Enter your name" />
+        <input
+          type="number"
+          id="roundsInput"
+          placeholder="Enter no. of rounds"
+          min="1"
+        />
+        <button type="submit" id="startBtn">Start Game</button>
+      </div>
+
       <div class="scoreBoard">
         <div class="title">
           <h1>Rock</h1>
@@ -27,18 +62,20 @@
           <h1>Scissors</h1>
         </div>
         <div class="scoreCards">
-          <div class="playerScore">
-            <p>PLAYERSS SCORE</p>
-            <h2>12</h2>
+          <div class="yourScore">
+            <p class="playerNameDisplay"></p>
+            <p>SCORE</p>
+            <h2 class="yourScoreDisplay">0</h2>
           </div>
           <div class="computerScore">
-            <p>COMPUTER SCORE</p>
-            <h2>23</h2>
+            <p>COMPUTER</p>
+            <p>SCORE</p>
+            <h2 class="computerScoreDisplay">0</h2>
           </div>
         </div>
       </div>
       <div class="playground">
-        <div class="roundNum">Round 1</div>
+        <div class="roundNum">Round <span class="roundNumDisplay">1</span></div>
         <div class="chooseboard">
           <div class="chooseCard">
             <p>Rock</p>
@@ -63,18 +100,31 @@
         <div class="playboard">
           <div class="yourChoice">
             <p>You Picked</p>
-            <div class="rockHand circle">
+            <div class="rockHand circle rockHandLeft">
               <img src="./assets/rock.png" alt="rockHand" />
+            </div>
+            <div class="paperHand circle paperHandLeft">
+              <img src="./assets/paper.png" alt="paperHand" />
+            </div>
+            <div class="scissorHand circle scissorHandLeft">
+              <img src="./assets/scissor.png" alt="scissorHand" />
             </div>
           </div>
           <div class="messageBox">
-            <p class="message">TIE UP!</p>
+            <p class="roundResultDisplay">TIE UP!</p>
             <button class="nextBtn">Next round</button>
+            <button class="replayBtn">Replay</button>
           </div>
           <div class="computerChoice">
             <p>PC Picked</p>
-            <div class="paperHand circle">
+            <div class="rockHand circle rockHandRight">
+              <img src="./assets/rock.png" alt="rockHand" />
+            </div>
+            <div class="paperHand circle paperHandRight">
               <img src="./assets/paper.png" alt="paperHand" />
+            </div>
+            <div class="scissorHand circle scissorHandRight">
+              <img src="./assets/scissor.png" alt="scissorHand" />
             </div>
           </div>
         </div>
