@@ -251,7 +251,8 @@ li:before {
 
 .nextBtn,
 .replayBtn,
-.playAgainBtn {
+.playAgainBtn,
+.exitGameBtn {
   color: white;
   background-color: #89c15e;
   border: none;
@@ -264,9 +265,19 @@ li:before {
   cursor: pointer;
 }
 
+.playAgainBtn {
+  background-color: white;
+  color: #89c15e;
+}
+
+.playAgainBtn:hover {
+  background-color: #89c15e;
+  color: white;
+}
+
 .nextBtn:hover,
 .replayBtn:hover,
-.playAgainBtn:hover {
+.exitGameBtn:hover {
   background-color: white;
   color: #89c15e;
 }

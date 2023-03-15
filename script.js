@@ -89,6 +89,7 @@ function gameplayScreen() {
   replayBtn.style.display = "none";
   roundResultDisplay.textContent = "";
   rulesContainer.style.display = "none";
+  modal.style.display = "none";
 
   roundNumDisplay.textContent = player.roundNum;
   playerNameDisplay.textContent = player.playerName;
@@ -206,26 +207,33 @@ function startGame() {
   rulesContainer.style.display = "none";
 }
 
-rockHand.addEventListener("click", () => {
-  rulesContainer.style.display = "none";
-  if (chooseboard.style.display !== "none") {
-    chooseboard.style.display = "none";
-    playboard.style.display = "flex";
-    yourChoiceValue = 0;
-    computerChoiceValue = Math.floor(Math.random() * 3);
-    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
+function spinWheelAnimation() {
+  rockHandRight.style.display = "flex";
+  paperHandRight.style.display = "none";
+  scissorHandRight.style.display = "none";
 
-    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
-
-    rockHandLeft.style.display = "flex";
-    paperHandLeft.style.display = "none";
-    scissorHandLeft.style.display = "none";
-
-    if (roundResult === -1) {
-      rockHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+  const spinwheelAudio = new Audio("./assets/spinwheel.wav");
+  spinwheelAudio.play();
+  const randomInterval = setInterval(() => {
+    let randomChoice = Math.floor(Math.random() * 3);
+    if (randomChoice === 0) {
+      rockHandRight.style.display = "flex";
+      paperHandRight.style.display = "none";
+      scissorHandRight.style.display = "none";
+    } else if (randomChoice === 1) {
+      rockHandRight.style.display = "none";
+      paperHandRight.style.display = "flex";
+      scissorHandRight.style.display = "none";
+    } else {
+      rockHandRight.style.display = "none";
+      paperHandRight.style.display = "none";
+      scissorHandRight.style.display = "flex";
     }
+  }, 20);
 
+  setTimeout(() => {
+    clearInterval(randomInterval);
+    spinwheelAudio.pause();
     if (computerChoiceValue === 0) {
       rockHandRight.style.display = "flex";
       paperHandRight.style.display = "none";
@@ -254,8 +262,32 @@ rockHand.addEventListener("click", () => {
           "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
       }
     }
-    localStorage.setItem("player", JSON.stringify(player));
     displayButton();
+  }, 3000);
+}
+
+rockHand.addEventListener("click", () => {
+  rulesContainer.style.display = "none";
+  if (chooseboard.style.display !== "none") {
+    chooseboard.style.display = "none";
+    playboard.style.display = "flex";
+    yourChoiceValue = 0;
+    computerChoiceValue = Math.floor(Math.random() * 3);
+    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
+
+    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
+
+    rockHandLeft.style.display = "flex";
+    paperHandLeft.style.display = "none";
+    scissorHandLeft.style.display = "none";
+
+    if (roundResult === -1) {
+      rockHandLeft.style.cssText =
+        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+    }
+    spinWheelAnimation();
+
+    localStorage.setItem("player", JSON.stringify(player));
   } else {
     return undefined;
   }
@@ -281,36 +313,9 @@ paperHand.addEventListener("click", () => {
         "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
     }
 
-    if (computerChoiceValue === 0) {
-      rockHandRight.style.display = "flex";
-      paperHandRight.style.display = "none";
-      scissorHandRight.style.display = "none";
+    spinWheelAnimation();
 
-      if (roundResult === 1) {
-        rockHandRight.style.cssText =
-          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-      }
-    } else if (computerChoiceValue === 1) {
-      rockHandRight.style.display = "none";
-      paperHandRight.style.display = "flex";
-      scissorHandRight.style.display = "none";
-
-      if (roundResult === 1) {
-        paperHandRight.style.cssText =
-          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-      }
-    } else {
-      rockHandRight.style.display = "none";
-      paperHandRight.style.display = "none";
-      scissorHandRight.style.display = "flex";
-
-      if (roundResult === 1) {
-        scissorHandRight.style.cssText =
-          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-      }
-    }
     localStorage.setItem("player", JSON.stringify(player));
-    displayButton();
   } else {
     return undefined;
   }
@@ -336,36 +341,9 @@ scissorHand.addEventListener("click", () => {
         "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
     }
 
-    if (computerChoiceValue === 0) {
-      rockHandRight.style.display = "flex";
-      paperHandRight.style.display = "none";
-      scissorHandRight.style.display = "none";
+    spinWheelAnimation();
 
-      if (roundResult === 1) {
-        rockHandRight.style.cssText =
-          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-      }
-    } else if (computerChoiceValue === 1) {
-      rockHandRight.style.display = "none";
-      paperHandRight.style.display = "flex";
-      scissorHandRight.style.display = "none";
-
-      if (roundResult === 1) {
-        paperHandRight.style.cssText =
-          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-      }
-    } else {
-      rockHandRight.style.display = "none";
-      paperHandRight.style.display = "none";
-      scissorHandRight.style.display = "flex";
-
-      if (roundResult === 1) {
-        scissorHandRight.style.cssText =
-          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-      }
-    }
     localStorage.setItem("player", JSON.stringify(player));
-    displayButton();
   } else {
     return undefined;
   }
@@ -382,20 +360,25 @@ replayBtn.addEventListener("click", () => {
 
 const playAgainBtn = document.querySelector(".playAgainBtn");
 playAgainBtn.addEventListener("click", () => {
-  startGameForm.style.display = "flex";
-  playground.style.display = "none";
-  scoreBoard.style.display = "none";
-  playboard.style.display = "none";
-  rulesBtn.style.display = "flex";
   modal.style.display = "none";
+  scoreBoard.style.display = "flex";
+  playboard.style.display = "flex";
 
-  player.roundNum = 1;
   player.yourScore = 0;
   player.computerScore = 0;
+  player.roundNum = 1;
+  player.gameResultMsg1 = "";
+  player.gameResultMsg2 = "";
+  player.history = [];
+  player.screen = "gameplay";
+  localStorage.setItem("player", JSON.stringify(player));
+
+  playerNameDisplay.textContent = player.playerName;
   yourScoreDisplay.textContent = player.yourScore;
   computerScoreDisplay.textContent = player.computerScore;
-  player.screen = "welcome";
-  localStorage.setItem("player", JSON.stringify(player));
+  roundNumDisplay.textContent = player.roundNum;
+
+  startGame();
 });
 
 rulesBtn.addEventListener("click", () => {
@@ -449,6 +432,9 @@ modalResume.addEventListener("click", function (event) {
 
 const resumeBtn = document.querySelector(".resumeBtn");
 resumeBtn.addEventListener("click", () => {
+  player.screen = "gameplay";
+
+  localStorage.setItem("player", JSON.stringify(player));
   startGame();
   modalResume.style.display = "none";
 });
@@ -461,6 +447,8 @@ restartBtn.addEventListener("click", () => {
   player.gameResultMsg1 = "";
   player.gameResultMsg2 = "";
   player.history = [];
+  player.screen = "gameplay";
+
   localStorage.setItem("player", JSON.stringify(player));
 
   yourScoreDisplay.textContent = player.yourScore;
@@ -473,6 +461,23 @@ restartBtn.addEventListener("click", () => {
 
 const exitBtn = document.querySelector(".exitBtn");
 exitBtn.addEventListener("click", () => {
+  welcomeScreen();
+
+  player.screen = "welcome";
+  player.playerName = "";
+  player.totalRounds = 0;
+  player.yourScore = 0;
+  player.computerScore = 0;
+  player.roundNum = 1;
+  player.gameResultMsg1 = "";
+  player.gameResultMsg2 = "";
+  player.history = [];
+  localStorage.setItem("player", JSON.stringify(player));
+  modalResume.style.display = "none";
+});
+
+const exitGameBtn = document.querySelector(".exitGameBtn");
+exitGameBtn.addEventListener("click", () => {
   welcomeScreen();
 
   player.screen = "welcome";
