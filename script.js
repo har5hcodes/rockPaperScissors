@@ -103,6 +103,16 @@ function gameplayScreen() {
 }
 
 function gameoverScreen() {
+  const resultImg = document.querySelector("#resultImg");
+
+  if (player.yourScore > player.computerScore) {
+    resultImg.src = "./assets/winner.gif";
+  } else if (player.yourScore < player.computerScore) {
+    resultImg.src = "./assets/lose.gif";
+  } else {
+    resultImg.src = "./assets/tie.gif";
+  }
+
   gameResult1.textContent = player.gameResultMsg1;
   gameResult2.textContent = player.gameResultMsg2;
   startGameForm.style.display = "none";
