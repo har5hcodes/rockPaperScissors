@@ -269,6 +269,7 @@ function spinWheelAnimation() {
   setTimeout(() => {
     clearInterval(randomInterval);
     spinwheelAudio.pause();
+    spinwheelAudio.currentTime = 0;
     if (computerChoiceValue === 0) {
       rockHandRight.style.display = "flex";
       paperHandRight.style.display = "none";
@@ -500,7 +501,7 @@ const historyBtn = document.querySelector(".historyBtn");
   });
 });
 
-rockHand.addEventListener("click", () => {
+function rockHandHandler() {
   rulesContainer.style.display = "none";
   if (chooseboard.style.display !== "none") {
     chooseboard.style.display = "none";
@@ -528,9 +529,12 @@ rockHand.addEventListener("click", () => {
   } else {
     return undefined;
   }
+}
+rockHand.addEventListener("click", () => {
+  rockHandHandler();
 });
 
-paperHand.addEventListener("click", () => {
+function paperHandHandler() {
   rulesContainer.style.display = "none";
   if (chooseboard.style.display !== "none") {
     chooseboard.style.display = "none";
@@ -558,9 +562,12 @@ paperHand.addEventListener("click", () => {
   } else {
     return undefined;
   }
+}
+paperHand.addEventListener("click", () => {
+  paperHandHandler();
 });
 
-scissorHand.addEventListener("click", () => {
+function scissorHandHandler() {
   rulesContainer.style.display = "none";
   if (chooseboard.style.display !== "none") {
     chooseboard.style.display = "none";
@@ -588,4 +595,8 @@ scissorHand.addEventListener("click", () => {
   } else {
     return undefined;
   }
+}
+
+scissorHand.addEventListener("click", () => {
+  scissorHandHandler();
 });
