@@ -84,7 +84,7 @@ function gameplayScreen() {
   scissorHandRight.style.boxShadow = "";
 
   startGameForm.style.display = "none";
-  playground.style.display = "block";
+  playground.style.display = "flex";
   scoreBoard.style.display = "flex";
   chooseboard.style.display = "flex";
   playboard.style.display = "none";
@@ -222,7 +222,7 @@ function startGame() {
   paperHandRight.style.boxShadow = "";
   scissorHandRight.style.boxShadow = "";
 
-  playground.style.display = "block";
+  playground.style.display = "flex";
   chooseboard.style.display = "flex";
   playboard.style.display = "none";
   nextBtn.style.display = "none";

@@ -119,6 +119,8 @@
 
 .playground {
   display: none;
+  justify-content: center;
+  align-items: center;
   position: relative;
   border-top: 0.1px solid #004429;
   border-bottom: 0.1px solid #004429;
@@ -127,17 +129,16 @@
 
 .playboard {
   display: none;
+  width: 100%;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 150px;
-  display: none;
 }
 
 .chooseboard {
   display: flex;
+  width: 100%;
   justify-content: space-evenly;
   align-items: center;
-  margin-top: 150px;
 }
 
 .playground .circle {
