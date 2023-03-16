@@ -121,6 +121,7 @@
   display: none;
   position: relative;
   border-top: 0.1px solid #004429;
+  border-bottom: 0.1px solid #004429;
   border-radius: 15px;
 }
 
@@ -249,10 +250,42 @@ li:before {
   background-color: yellow;
 }
 
+.leaveGameBtn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: large;
+  border: none;
+  background-color: transparent;
+  color: #004429;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+.historyBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: large;
+  border: none;
+  background-color: transparent;
+  color: #004429;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-right: 30px;
+}
+
+.historyBtn:hover,
+.leaveGameBtn:hover {
+  color: white;
+}
+
 .nextBtn,
 .replayBtn,
 .playAgainBtn,
-.exitGameBtn {
+.exitGameBtn,
+.historyGameBtn {
   color: white;
   background-color: #89c15e;
   border: none;
@@ -277,7 +310,8 @@ li:before {
 
 .nextBtn:hover,
 .replayBtn:hover,
-.exitGameBtn:hover {
+.exitGameBtn:hover,
+.historyGameBtn:hover {
   background-color: white;
   color: #89c15e;
 }
@@ -400,7 +434,9 @@ li:before {
   text-transform: uppercase;
 }
 
-#modalResume {
+#modalResume,
+#modalConfirm,
+#modalHistory {
   position: fixed;
   top: 0;
   left: 0;
@@ -414,6 +450,7 @@ li:before {
 }
 
 .modal-content {
+  color: white;
   background-color: #004429;
   padding: 20px 40px;
   text-align: center;
@@ -422,7 +459,9 @@ li:before {
   border-radius: 5px;
 }
 
-#modalResume button {
+#modalResume button,
+#modalConfirm button,
+#modalHistory button {
   color: white;
   background-color: #89c15e;
   border: none;
@@ -435,7 +474,32 @@ li:before {
   cursor: pointer;
 }
 
-#modalResume button:hover {
+#modalResume button:hover,
+#modalConfirm button:hover,
+#modalHistory button:hover {
   background-color: white;
   color: #89c15e;
+}
+
+.modal-history {
+  display: flex;
+  flex-direction: column;
+}
+
+#historyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  font-size: 20px;
+  flex-direction: column;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+  text-align: start;
 }

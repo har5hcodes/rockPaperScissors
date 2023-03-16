@@ -26,15 +26,26 @@
         <button class="exitBtn">Exit</button>
       </div>
     </div>
-
+    <div id="modalHistory">
+      <div class="modal-content modal-history">
+        <div id="historyContainer"></div>
+        <button class="closeHistoryBtn">Close</button>
+      </div>
+    </div>
+    <div id="modalConfirm">
+      <div class="modal-content">
+        <h2>Are you sure you want to exit?</h2>
+        <button class="yesBtn">Yes</button>
+        <button class="noBtn">No</button>
+      </div>
+    </div>
     <div class="container">
       <!-- <div class="starIcon">
         <img src="./assets/star.png" alt="" />
       </div> -->
       <div class="modal">
         <div class="animation">
-          <!-- <img src="./assets/giphy.gif" alt="" /> -->
-          <img src="./assets/won.png" alt="" />
+          <img src="./assets/won.png" alt="" id="resultImg" />
         </div>
         <div class="result">
           <h2 class="gameResult1"></h2>
@@ -42,6 +53,7 @@
         </div>
         <div style="display: flex; gap: 20px">
           <button class="playAgainBtn">Play again</button>
+          <button class="historyGameBtn">View Game History</button>
           <button class="exitGameBtn">Exit Game</button>
         </div>
       </div>
@@ -78,6 +90,8 @@
         </div>
       </div>
       <div class="playground">
+        <button class="leaveGameBtn">Exit Game</button>
+        <button class="historyBtn">View History</button>
         <div class="roundNum">Round <span class="roundNumDisplay">1</span></div>
         <div class="chooseboard">
           <div class="chooseCard">

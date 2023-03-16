@@ -14,6 +14,9 @@ let yourChoiceValue, computerChoiceValue;
 let roundResult;
 let gameResult;
 
+const choices = ["rock", "paper", "scissor"];
+const results = ["win", "draw", "lose"];
+
 const usernameInput = document.querySelector("#usernameInput");
 const roundsInput = document.querySelector("#roundsInput");
 
@@ -263,91 +266,8 @@ function spinWheelAnimation() {
       }
     }
     displayButton();
-  }, 3000);
+  }, 2000);
 }
-
-rockHand.addEventListener("click", () => {
-  rulesContainer.style.display = "none";
-  if (chooseboard.style.display !== "none") {
-    chooseboard.style.display = "none";
-    playboard.style.display = "flex";
-    yourChoiceValue = 0;
-    computerChoiceValue = Math.floor(Math.random() * 3);
-    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
-
-    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
-
-    rockHandLeft.style.display = "flex";
-    paperHandLeft.style.display = "none";
-    scissorHandLeft.style.display = "none";
-
-    if (roundResult === -1) {
-      rockHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-    }
-    spinWheelAnimation();
-
-    localStorage.setItem("player", JSON.stringify(player));
-  } else {
-    return undefined;
-  }
-});
-
-paperHand.addEventListener("click", () => {
-  rulesContainer.style.display = "none";
-  if (chooseboard.style.display !== "none") {
-    chooseboard.style.display = "none";
-    playboard.style.display = "flex";
-    yourChoiceValue = 1;
-    computerChoiceValue = Math.floor(Math.random() * 3);
-    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
-
-    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
-
-    rockHandLeft.style.display = "none";
-    paperHandLeft.style.display = "flex";
-    scissorHandLeft.style.display = "none";
-
-    if (roundResult === -1) {
-      paperHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-    }
-
-    spinWheelAnimation();
-
-    localStorage.setItem("player", JSON.stringify(player));
-  } else {
-    return undefined;
-  }
-});
-
-scissorHand.addEventListener("click", () => {
-  rulesContainer.style.display = "none";
-  if (chooseboard.style.display !== "none") {
-    chooseboard.style.display = "none";
-    playboard.style.display = "flex";
-    yourChoiceValue = 2;
-    computerChoiceValue = Math.floor(Math.random() * 3);
-    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
-
-    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
-
-    rockHandLeft.style.display = "none";
-    paperHandLeft.style.display = "none";
-    scissorHandLeft.style.display = "flex";
-
-    if (roundResult === -1) {
-      scissorHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-    }
-
-    spinWheelAnimation();
-
-    localStorage.setItem("player", JSON.stringify(player));
-  } else {
-    return undefined;
-  }
-});
 
 nextBtn.addEventListener("click", () => {
   player.roundNum++;
@@ -363,6 +283,7 @@ playAgainBtn.addEventListener("click", () => {
   modal.style.display = "none";
   scoreBoard.style.display = "flex";
   playboard.style.display = "flex";
+  rulesBtn.style.display = "block";
 
   player.yourScore = 0;
   player.computerScore = 0;
@@ -491,4 +412,141 @@ exitGameBtn.addEventListener("click", () => {
   player.history = [];
   localStorage.setItem("player", JSON.stringify(player));
   modalResume.style.display = "none";
+});
+
+const leaveGameBtn = document.querySelector(".leaveGameBtn");
+leaveGameBtn.addEventListener("click", () => {
+  const modalConfirm = document.querySelector("#modalConfirm");
+  const yesBtn = document.querySelector(".yesBtn");
+  const noBtn = document.querySelector(".noBtn");
+
+  modalConfirm.style.display = "flex";
+  yesBtn.addEventListener("click", () => {
+    welcomeScreen();
+    player.screen = "welcome";
+    player.playerName = "";
+    player.totalRounds = 0;
+    player.yourScore = 0;
+    player.computerScore = 0;
+    player.roundNum = 1;
+    player.gameResultMsg1 = "";
+    player.gameResultMsg2 = "";
+    player.history = [];
+    localStorage.setItem("player", JSON.stringify(player));
+    modalConfirm.style.display = "none";
+  });
+  noBtn.addEventListener("click", () => {
+    modalConfirm.style.display = "none";
+  });
+});
+
+const historyGameBtn = document.querySelector(".historyGameBtn");
+const historyBtn = document.querySelector(".historyBtn");
+
+[historyBtn, historyGameBtn].forEach((element) => {
+  element.addEventListener("click", function () {
+    const modalHistory = document.querySelector("#modalHistory");
+    const closeHistoryBtn = document.querySelector(".closeHistoryBtn");
+    const historyContainer = document.querySelector("#historyContainer");
+
+    modalHistory.style.display = "flex";
+    if (player.history.length > 0) {
+      historyContainer.innerHTML = `<div class="historyItem" style="color: #89c15e;font-weight: bold; text-transform: uppercase;"><div>Your Choice</div> <div>PC Choice</div> <div>Result</div> </div>`;
+      player.history.forEach((round) => {
+        const yourChoice = choices[`${round[0]}`];
+        const pcChoice = choices[`${round[1]}`];
+        const result = results[`${round[2] + 1}`];
+        historyContainer.innerHTML += `<div class="historyItem"><div> ${yourChoice}  </div> <div>${pcChoice}</div> <div>${result}</div> </div>`;
+      });
+    } else {
+      historyContainer.innerHTML = "<h2>No history found</h2>";
+    }
+
+    closeHistoryBtn.addEventListener("click", () => {
+      modalHistory.style.display = "none";
+    });
+  });
+});
+
+rockHand.addEventListener("click", () => {
+  rulesContainer.style.display = "none";
+  if (chooseboard.style.display !== "none") {
+    chooseboard.style.display = "none";
+    playboard.style.display = "flex";
+    yourChoiceValue = 0;
+    computerChoiceValue = Math.floor(Math.random() * 3);
+    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
+
+    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
+
+    rockHandLeft.style.display = "flex";
+    paperHandLeft.style.display = "none";
+    scissorHandLeft.style.display = "none";
+
+    if (roundResult === -1) {
+      rockHandLeft.style.cssText =
+        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+    }
+    spinWheelAnimation();
+
+    localStorage.setItem("player", JSON.stringify(player));
+  } else {
+    return undefined;
+  }
+});
+
+paperHand.addEventListener("click", () => {
+  rulesContainer.style.display = "none";
+  if (chooseboard.style.display !== "none") {
+    chooseboard.style.display = "none";
+    playboard.style.display = "flex";
+    yourChoiceValue = 1;
+    computerChoiceValue = Math.floor(Math.random() * 3);
+    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
+
+    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
+
+    rockHandLeft.style.display = "none";
+    paperHandLeft.style.display = "flex";
+    scissorHandLeft.style.display = "none";
+
+    if (roundResult === -1) {
+      paperHandLeft.style.cssText =
+        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+    }
+
+    spinWheelAnimation();
+
+    localStorage.setItem("player", JSON.stringify(player));
+  } else {
+    return undefined;
+  }
+});
+
+scissorHand.addEventListener("click", () => {
+  rulesContainer.style.display = "none";
+  if (chooseboard.style.display !== "none") {
+    chooseboard.style.display = "none";
+    playboard.style.display = "flex";
+    yourChoiceValue = 2;
+    computerChoiceValue = Math.floor(Math.random() * 3);
+    roundResult = checkRoundWinner(yourChoiceValue, computerChoiceValue);
+
+    player.history.push([yourChoiceValue, computerChoiceValue, roundResult]);
+
+    rockHandLeft.style.display = "none";
+    paperHandLeft.style.display = "none";
+    scissorHandLeft.style.display = "flex";
+
+    if (roundResult === -1) {
+      scissorHandLeft.style.cssText =
+        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+    }
+
+    spinWheelAnimation();
+
+    localStorage.setItem("player", JSON.stringify(player));
+  } else {
+    return undefined;
+  }
 });
