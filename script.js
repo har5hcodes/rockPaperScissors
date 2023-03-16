@@ -14,6 +14,10 @@ let yourChoiceValue, computerChoiceValue;
 let roundResult;
 let gameResult;
 
+const winnerAudio = new Audio("./assets/Applause.mp3");
+const loserAudio = new Audio("./assets/Lose.mp3");
+const spinwheelAudio = new Audio("./assets/spinwheel.wav");
+
 const choices = ["rock", "paper", "scissor"];
 const results = ["win", "draw", "lose"];
 
@@ -102,15 +106,21 @@ function gameplayScreen() {
   modalResume.style.display = "flex";
 }
 
-function gameoverScreen() {
-  const resultImg = document.querySelector("#resultImg");
+const winnerGif = new Image();
+winnerGif.src = "./assets/winner.gif";
+const loserGif = new Image();
+loserGif.src = "./assets/lose.gif";
+const animation = document.querySelector(".animation");
+const drawGif = new Image();
+drawGif.src = "./assets/tie.gif";
 
+function gameoverScreen() {
   if (player.yourScore > player.computerScore) {
-    resultImg.src = "./assets/winner.gif";
+    animation.appendChild(winnerGif);
   } else if (player.yourScore < player.computerScore) {
-    resultImg.src = "./assets/lose.gif";
+    animation.appendChild(loserGif);
   } else {
-    resultImg.src = "./assets/tie.gif";
+    animation.appendChild(drawGif);
   }
 
   gameResult1.textContent = player.gameResultMsg1;
@@ -178,12 +188,10 @@ function endGame() {
   rulesBtn.style.display = "none";
   modal.style.display = "flex";
 
-  const resultImg = document.querySelector("#resultImg");
-
   if (player.yourScore > player.computerScore) {
-    resultImg.src = "./assets/winner.gif";
+    animation.innerHTML = "";
+    animation.appendChild(winnerGif);
 
-    const winnerAudio = new Audio("./assets/Applause.mp3");
     winnerAudio.play();
 
     player.gameResultMsg1 = "Hurray!!!";
@@ -191,16 +199,19 @@ function endGame() {
     gameResult1.textContent = "Hurray!!!";
     gameResult2.textContent = "You Won the Game.";
   } else if (player.yourScore < player.computerScore) {
-    const loserAudio = new Audio("./assets/Lose.mp3");
+    animation.innerHTML = "";
+    animation.appendChild(loserGif);
+
     loserAudio.play();
 
-    resultImg.src = "./assets/lose.gif";
     player.gameResultMsg1 = "Sorry!!!";
     player.gameResultMsg2 = "You Lost the Game.";
     gameResult1.textContent = "Sorry!!!";
     gameResult2.textContent = "You Lost the Game.";
   } else {
-    resultImg.src = "./assets/tie.gif";
+    animation.innerHTML = "";
+    animation.appendChild(drawGif);
+
     player.gameResultMsg1 = "Draw!!!";
     player.gameResultMsg2 = "You Tied the Game.";
     gameResult1.textContent = "Draw!!!";
@@ -237,7 +248,6 @@ function spinWheelAnimation() {
   paperHandRight.style.display = "none";
   scissorHandRight.style.display = "none";
 
-  const spinwheelAudio = new Audio("./assets/spinwheel.wav");
   spinwheelAudio.play();
   const randomInterval = setInterval(() => {
     let randomChoice = Math.floor(Math.random() * 3);
