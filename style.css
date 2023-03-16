@@ -503,3 +503,9 @@ li:before {
   gap: 30px;
   text-align: start;
 }
+
+#resultImg {
+  width: 300px;
+  height: 300px;
+  margin-bottom: -40px;
+}

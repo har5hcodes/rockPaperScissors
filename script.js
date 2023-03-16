@@ -168,17 +168,29 @@ function endGame() {
   rulesBtn.style.display = "none";
   modal.style.display = "flex";
 
+  const resultImg = document.querySelector("#resultImg");
+
   if (player.yourScore > player.computerScore) {
+    resultImg.src = "./assets/winner.gif";
+
+    const winnerAudio = new Audio("./assets/Applause.mp3");
+    winnerAudio.play();
+
     player.gameResultMsg1 = "Hurray!!!";
     player.gameResultMsg2 = "You Won the Game.";
     gameResult1.textContent = "Hurray!!!";
     gameResult2.textContent = "You Won the Game.";
   } else if (player.yourScore < player.computerScore) {
+    const loserAudio = new Audio("./assets/Lose.mp3");
+    loserAudio.play();
+
+    resultImg.src = "./assets/lose.gif";
     player.gameResultMsg1 = "Sorry!!!";
     player.gameResultMsg2 = "You Lost the Game.";
     gameResult1.textContent = "Sorry!!!";
     gameResult2.textContent = "You Lost the Game.";
   } else {
+    resultImg.src = "./assets/tie.gif";
     player.gameResultMsg1 = "Draw!!!";
     player.gameResultMsg2 = "You Tied the Game.";
     gameResult1.textContent = "Draw!!!";
@@ -483,10 +495,13 @@ rockHand.addEventListener("click", () => {
     paperHandLeft.style.display = "none";
     scissorHandLeft.style.display = "none";
 
-    if (roundResult === -1) {
-      rockHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-    }
+    setTimeout(() => {
+      if (roundResult === -1) {
+        rockHandLeft.style.cssText =
+          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+      }
+    }, 2000);
+
     spinWheelAnimation();
 
     localStorage.setItem("player", JSON.stringify(player));
@@ -510,10 +525,12 @@ paperHand.addEventListener("click", () => {
     paperHandLeft.style.display = "flex";
     scissorHandLeft.style.display = "none";
 
-    if (roundResult === -1) {
-      paperHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-    }
+    setTimeout(() => {
+      if (roundResult === -1) {
+        paperHandLeft.style.cssText =
+          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+      }
+    }, 2000);
 
     spinWheelAnimation();
 
@@ -538,10 +555,12 @@ scissorHand.addEventListener("click", () => {
     paperHandLeft.style.display = "none";
     scissorHandLeft.style.display = "flex";
 
-    if (roundResult === -1) {
-      scissorHandLeft.style.cssText =
-        "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
-    }
+    setTimeout(() => {
+      if (roundResult === -1) {
+        scissorHandLeft.style.cssText =
+          "box-shadow: 0 0 0 30px rgba(59, 103, 32, 0.15), 0 0 0 50px rgba(29, 168, 43, 0.3), 0 0 0 75px rgba(46, 154, 37, 0.2);";
+      }
+    }, 2000);
 
     spinWheelAnimation();
 
